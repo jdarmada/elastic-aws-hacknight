@@ -17,7 +17,7 @@ Either direction you follow you must use a serverless Elastic deployment:
 Sign-up for a free trial here: [Elastic Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview)
 
 
-### What you'll build - Hack Night Starter Project
+## What you'll build - Hack Night Starter Project
 
 Predict 2026 World Cup matches using live data from the tournament happening right now. You'll build a **World Cup Predictor agent** that you can ask things like:
 
@@ -35,7 +35,7 @@ Run the notebook first to populate the index, then move to Agent Builder.
 
 ---
 
-## Teams in the Dataset
+### Teams in the Dataset
 
 All 48 qualified nations from the 2026 World Cup - including `Brazil`, `Germany`, `France`, `Argentina`, `Spain`, `England`, `USA`, `Mexico`, `Canada`, `Morocco`, `Japan`, `Portugal`, and more.
 
@@ -43,19 +43,19 @@ The index includes both completed results and upcoming fixtures, so the agent ca
 
 ---
 
-## Prerequisites
+### Prerequisites
 
 - **Elastic Serverless** project (sign up at [elastic.co](https://www.elastic.co))
 
 ---
 
-## Part 1 - Notebook
+### Part 1 - Notebook
 
 `world_cup_predictor.ipynb`
 
 Run this first - it fetches live 2026 data and ingests it. All queries and analysis happen in Agent Builder (Part 2). The notebook's only job is to populate the index.
 
-### Option A - Google Colab (recommended, no install needed)
+#### Option A - Google Colab (recommended, no install needed)
 
 The fastest way to get started. Just a browser - no Python install required.
 
@@ -68,7 +68,7 @@ That's it. Colab handles all the dependencies automatically when the first cell 
 
 ---
 
-### Option B - Run locally
+#### Option B - Run locally
 
 If you'd prefer to run on your own machine:
 
@@ -86,7 +86,7 @@ This opens a browser tab. Run cells one at a time with **Shift + Enter**, or run
 
 ---
 
-### Filling in your credentials
+#### Filling in your credentials
 
 Whichever option you use, fill in these two values in the Section 1 cell before running:
 
@@ -97,7 +97,7 @@ ELASTIC_API_KEY  = "your-elastic-api-key"
 
 > **Finding your credentials:** Elastic Cloud Console → Your Project → Connection Details
 
-### What the notebook does
+#### What the notebook does
 
 **Section 1 - Connect** to Elastic Serverless.
 
@@ -111,7 +111,7 @@ ELASTIC_API_KEY  = "your-elastic-api-key"
 
 **To refresh with latest results:** re-run cells 2-4. The index is dropped and recreated each time so there are no duplicates. Takes about 30 seconds.
 
-### Index schema - `wc2026_matches`
+#### Index schema - `wc2026_matches`
 
 | Field | Type | Notes |
 |---|---|---|
@@ -133,7 +133,7 @@ ELASTIC_API_KEY  = "your-elastic-api-key"
 
 ---
 
-## Part 2 - Agent Builder
+### Part 2 - Agent Builder
 
 Everything for Part 2 lives in **`agent_builder_guide.md`**. It gives you two paths to the same result:
 
@@ -142,7 +142,7 @@ Everything for Part 2 lives in **`agent_builder_guide.md`**. It gives you two pa
 
 Either way, once the four tools and the agent exist, open **Kibana → Agents** and the **World Cup 2026 Predictor** is ready to chat.
 
-### Navigate to Agent Builder
+#### Navigate to Agent Builder
 
 In your Elastic Serverless project, open **Kibana** from the project dashboard.
 
@@ -152,7 +152,7 @@ Look for **Agents** in the main navigation. If it's not visible:
 
 ---
 
-### The Four Tools
+#### The Four Tools
 
 | Tool ID | What it does |
 |---|---|
@@ -165,7 +165,7 @@ See `agent_builder_guide.md` for the exact ES|QL query and parameter config for 
 
 ---
 
-### The Custom Agent
+#### The Custom Agent
 
 | Field | Value |
 |---|---|
@@ -177,7 +177,7 @@ See `agent_builder_guide.md` for the exact ES|QL query and parameter config for 
 
 ---
 
-### Step 5 - Chat With Your Agent
+#### Step 5 - Chat With Your Agent
 
 Try these - all grounded in live 2026 data:
 
