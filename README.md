@@ -17,27 +17,21 @@ Either direction you follow you must use a serverless Elastic deployment:
 Sign-up for a free trial here: [Elastic Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview)
 
 
-### Elastic Serverless · Hack Night Starter Project
+### What you'll build - Hack Night Starter Project
 
-Predict 2026 World Cup matches using live data from the tournament happening right now. This project has two parts that build on each other:
-
-- **Part 1 - Notebook:** fetch live 2026 match data from a public API and ingest it into Elasticsearch
-- **Part 2 - Agent Builder:** build a conversational AI agent on top of that data inside Kibana - no extra code, LLM included
-
-Run the notebook first to populate the index, then move to Agent Builder.
-
----
-
-## What You'll Build
-
-A **World Cup Predictor agent** that you can ask things like:
+Predict 2026 World Cup matches using live data from the tournament happening right now. You'll build a **World Cup Predictor agent** that you can ask things like:
 
 > *"Predict the upcoming Brazil vs Scotland match"*
 > *"Compare France and Argentina based on their 2026 results so far"*
 > *"Who are the top scorers in the tournament?"*
 > *"When does England play next and what's their form?"*
 
-The agent pulls live stats from Elasticsearch, reasons over them, and gives you a structured prediction with scoreline, key factors, and confidence level.
+The agent pulls live stats from Elasticsearch, reasons over them, and gives you a structured prediction with scoreline, key factors, and confidence level. The project has two parts that build on each other:
+
+- **Part 1 - Notebook:** fetch live 2026 match data from a public API and ingest it into Elasticsearch
+- **Part 2 - Agent Builder:** build a conversational AI agent on top of that data inside Kibana — no extra code, LLM included
+
+Run the notebook first to populate the index, then move to Agent Builder.
 
 ---
 
