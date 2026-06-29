@@ -144,12 +144,7 @@ Either way, once the four tools and the agent exist, open **Kibana → Agents** 
 
 #### Navigate to Agent Builder
 
-In your Elastic Serverless project, open **Kibana** from the project dashboard.
-
-Look for **Agents** in the main navigation. If it's not visible:
-
-> **Management → Advanced Settings** → search for Agent Builder → enable it.
-
+In your Elastic Serverless project, look for **Agents** in the main navigation. 
 ---
 
 #### The Four Tools
