@@ -387,4 +387,3 @@ Watch the **thinking trace** as the agent calls tools in sequence before respond
 - [Custom tools](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/tools/custom-tools)
 - [Custom agents](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/custom-agents)
 - [ES|QL reference](https://www.elastic.co/docs/explore-analyze/query-filter/languages/esql-kibana)
-- [openfootball/worldcup.json](https://github.com/openfootball/worldcup.json) - data source
