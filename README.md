@@ -1,23 +1,76 @@
 # Elastic and AWS Hack Night (World Cup Edition)
 
-Welcome to the Elastic and AWS hack night! Tonight you'll be building a project that uses Elasticsearch and public soccer data. 
+Welcome to the **Elastic and AWS Hack Night**! Tonight you'll build a project using **Elasticsearch** and **public soccer datasets** to create search experiences, AI applications, or anything else you can imagine.
 
-Projects will be judged based on:
-- Use of Elasticsearch features
-- Creativity
-- Usefulness
+Whether you're exploring semantic search, building a RAG chatbot, or experimenting with vector search, this is your chance to showcase what's possible with Elasticsearch.
 
-Top 3 projects will win Meta Ray-Ban glasses.
+## Judging Criteria and Presentations
+
+Projects will be evaluated on the following:
+
+| Criteria | Description |
+|----------|-------------|
+| **Use of Elasticsearch** | Demonstrates meaningful use of Elasticsearch features such as search, aggregations, vector search, and Agent Builder. |
+| **Creativity** | Presents a unique idea, novel user experience, or interesting technical implementation. |
+| **Usefulness** | Solves a real problem or provides valuable insights from the data. |
+
+At the end, you'll have the chance to present what you built, no matter how complete your project is. Don't be shy! It's in the spirit of the event to show off your ideas even if it's not done. 
+
+Some presentation guidelines:
+- **3 mins max**
+- Quickly mention what the project does, but more importantly, show the Elasticsearch portion from the queries you used, the custom tools and agents you built within Agent Builder.
+
+## Prizes
+
+The **top three teams** will each win a pair of **Meta Ray-Ban Smart Glasses**.
+
+Good luck, have fun, and happy hacking!
+
+## What you can build
 
 You have the choice on where to start:
-1. Follow the starter project and add complexity.
+1. Follow the starter project and add complexity and nuance.
 2. A completely new project that uses Elasticsearch and soccer data in some capacity.
 
 Either direction you follow you must use a serverless Elastic deployment:
 Sign-up for a free trial here: [Elastic Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview)
 
 
-## What you'll build - Hack Night Starter Project
+### Public Soccer Datasets
+
+This project leverages publicly available soccer datasets for player performance analysis, match data, and event-level analytics. You are not restricted to these, feel free to use any dataset you find.
+
+| Dataset | Description | Data Type |
+|---------|-------------|-----------|
+| **[FIFA World Cup 2026 Player Performance Dataset](https://www.kaggle.com/datasets/rauffauzanrambe/fifa-world-cup-2026-player-performance-dataset)** | Simulated/player performance dataset for the FIFA World Cup 2026. Includes player statistics, match performance metrics, team information, and tournament-related data suitable for machine learning and analytics. | Player & Match Statistics |
+| **[openfootball/worldcup.json](https://github.com/openfootball/worldcup.json)** | Open-source JSON dataset containing historical FIFA World Cup tournaments, including teams, fixtures, match results, venues, and tournament structure in an easy-to-use format. | Historical Match Results |
+| **[StatsBomb Open Data](https://github.com/statsbomb/open-data)** | One of the most comprehensive free football analytics datasets available. Provides detailed event-level data (passes, shots, dribbles, pressures, tackles, etc.), lineups, matches, competitions, and 360° data for selected competitions. Widely used in football analytics research and visualization. :contentReference[oaicite:0]{index=0} | Event-Level Match Data |
+
+### Example Projects
+
+| Project | Description | Elasticsearch Features |
+|--------|-------------|-------------------------|
+| **Player Search Engine** | Search players by name, country, club, position, or tournament statistics with instant filtering and autocomplete. | Full-text search, autocomplete, aggregations |
+| **Similar Player Finder** | Find players with similar playing styles using performance statistics or embeddings. | Vector search, kNN, dense vectors |
+| **Soccer RAG Chatbot** | Ask natural language questions like *"Who scored the most goals in the 2018 World Cup?"* or *"Show all matches Messi played against France."* | Elasticsearch + LLM + semantic search |
+| **Team Performance Explorer** | Compare national teams across tournaments using advanced statistics and historical trends. | Aggregations |
+| **Tournament History Search** | Search every FIFA World Cup match by team, player, venue, year, or scoreline. | Full-text search, facets, highlighting |
+| **Real-Time Match Dashboard** | Simulate live match updates by streaming events into Elasticsearch and visualizing them in Kibana. | Data streams, ingest pipelines, dashboards |
+| **World Cup Analytics Dashboard** | Visualize goals, assists, cards, possession, shots, and player performance across tournaments. | Kibana, aggregations, time series |
+| **AI Match Summary Generator** | Generate natural-language summaries of matches from event data using an LLM with Elasticsearch as the retrieval layer. | Semantic search, vector search, RAG |
+
+### Stretch Ideas
+
+- Build a **player similarity search** using vector embeddings.
+- Create an **interactive World Cup timeline** showing every tournament, champion, and memorable match.
+- Compare **playing styles** between teams using passing networks and event data.
+- Build a **fantasy football assistant** that recommends players based on historical performance.
+- Create a **natural language search experience** where users ask soccer questions and Elasticsearch retrieves the relevant matches, events, and player statistics.
+
+
+
+
+## Hack Night Starter Project
 
 Predict 2026 World Cup matches using live data from the tournament happening right now. You'll build a **World Cup Predictor agent** that you can ask things like:
 
