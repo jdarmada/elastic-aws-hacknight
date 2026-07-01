@@ -11,6 +11,7 @@ Projects will be evaluated on the following:
 | Criteria | Description |
 |----------|-------------|
 | **Use of Elasticsearch** | Demonstrates meaningful use of Elasticsearch features such as search, aggregations, vector search, and Agent Builder. |
+| **Use of AWS Bedrock** |  |
 | **Creativity** | Presents a unique idea, novel user experience, or interesting technical implementation. |
 | **Usefulness** | Solves a real problem or provides valuable insights from the data. |
 
