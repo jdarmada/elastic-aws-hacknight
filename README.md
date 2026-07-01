@@ -22,7 +22,7 @@ Some presentation guidelines:
 
 ## Prizes
 
-The **top three teams** will each win a pair of **Meta Ray-Ban Smart Glasses**.
+The **top three projects** will each win a pair of **Meta Ray-Ban Smart Glasses**.
 
 Good luck, have fun, and happy hacking!
 
