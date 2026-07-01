@@ -6,7 +6,7 @@ For this hack night, **EIS is the recommended way to add AI to your project** - 
 
 ---
 
-## Why use EIS tonight
+## Benefits of EIS
 
 - **No API keys to manage** - you don't need your own AWS Bedrock, OpenAI, or Anthropic account
 - **No model deployment** - embedding models are ready the moment your project spins up
@@ -84,9 +84,58 @@ Then point a `semantic_text` field at it with `"inference_id": "wc-embeddings"`,
 
 ---
 
-## 3. Calling EIS from Python / the API
+## 3. Calling EIS from your own app / the API
 
-The inference API works from the same Python client the notebook uses. For example, to generate embeddings for a batch of text:
+Building something outside Agent Builder - a script, a backend, a custom chatbot? You talk to the **inference API** on your Elasticsearch endpoint directly. No connector, no keys of your own - auth is just your Elasticsearch API key, and the models (on Bedrock) are billed per token to your project.
+
+You need two things from the Elastic Cloud console (**your project → Connection details**): your Elasticsearch endpoint URL and an API key.
+
+### Chat completion (LLM)
+
+Serverless projects come with **preconfigured EIS endpoints** (Elastic Managed LLMs on Bedrock) - nothing to create. To see every inference endpoint available to you and its ID, run this in Kibana's **Dev Tools Console**:
+
+```
+GET _inference
+```
+
+Grab the `inference_id` of a `chat_completion` endpoint from the list. The API is OpenAI-compatible and **streams** its response over the `/_stream` path:
+
+```bash
+curl "$ELASTICSEARCH_URL/_inference/chat_completion/<chat-inference-id>/_stream" \
+  -H "Authorization: ApiKey $ELASTIC_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "messages": [
+      { "role": "system", "content": "You are a football analyst." },
+      { "role": "user", "content": "Who won the 2022 World Cup final?" }
+    ]
+  }'
+```
+
+Same call from Python with the official client:
+
+```python
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch(ELASTIC_ENDPOINT, api_key=ELASTIC_API_KEY)
+
+resp = es.inference.chat_completion_unified(
+    inference_id='<chat-inference-id>',
+    messages=[
+        {'role': 'system', 'content': 'You are a football analyst.'},
+        {'role': 'user',   'content': 'Who won the 2022 World Cup final?'},
+    ],
+)
+# response streams as SSE chunks - concatenate the delta.content fields
+```
+
+> Because the schema is OpenAI-compatible (`messages` with `system` / `user` / `assistant` roles), most OpenAI SDKs work too - just point their `base_url` at `<ELASTICSEARCH_URL>/_inference/chat_completion/<chat-inference-id>`.
+
+**This is the core of a RAG app:** query Elasticsearch for relevant context, drop it into the `system`/`user` message, then call this endpoint for a grounded answer.
+
+### Embeddings
+
+The same client generates embeddings - handy for building your own vector search:
 
 ```python
 resp = es.inference.inference(
@@ -97,7 +146,7 @@ resp = es.inference.inference(
 print(resp['text_embedding'][0]['embedding'][:5])
 ```
 
-For chat/LLM responses, the easiest path is Agent Builder or Search Playground (both already on EIS). To drive chat completion programmatically, see the [chat completion API](https://www.elastic.co/docs/api/doc/elasticsearch-serverless/operation/operation-inference-chat-completion-unified).
+See the [chat completion API reference](https://www.elastic.co/docs/api/doc/elasticsearch-serverless/operation/operation-inference-chat-completion-unified) for the full request/response schema, including tool calling.
 
 ---
 

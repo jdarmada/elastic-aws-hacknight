@@ -31,7 +31,7 @@ Good luck, have fun, and happy hacking!
 
 You have the choice on where to start:
 1. Head to [starter_project.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/starter_project.md) and follow the steps to build the World Cup Predictor agent. Extend this project by adding more data, queries, features, nuance etc.
-2. A completely new project that uses Elasticsearch and soccer data in some capacity. Head over to [open_challenge.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/open_challenge.md) for examples of what you can build and an example of how to ingest data.
+2. A completely new project that uses Elasticsearch, AWS Bedrock (through EIS) and soccer data in some capacity. Head over to [open_challenge.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/open_challenge.md) for examples of what you can build and an example of how to ingest data.
 
 Either direction you follow you must use a serverless Elastic deployment: [Elastic Cloud Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview)
 
