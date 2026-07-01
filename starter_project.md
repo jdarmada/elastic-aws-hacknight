@@ -1,4 +1,4 @@
-## Hack Night Starter Project
+# Hack Night Starter Project - World Cup Predictor Agent
 
 Predict 2026 World Cup matches using live data from the tournament happening right now. You'll build a **World Cup Predictor agent** that you can ask things like:
 
@@ -26,13 +26,13 @@ The index includes both completed results and upcoming fixtures, so the agent ca
 
 ### Prerequisites
 
-- **Elastic Serverless** project (sign up at [elastic.co](https://www.elastic.co))
+- **Elastic Serverless** project (sign up at [Elastic Cloud Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview))
 
 ---
 
 ### Part 1 - Notebook
 
-`world_cup_predictor.ipynb`
+[world_cup_predictor.ipynb](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/world_cup_predictor.ipynb)
 
 Run this first - it fetches live 2026 data and ingests it. All queries and analysis happen in Agent Builder (Part 2). The notebook's only job is to populate the index.
 
@@ -40,10 +40,11 @@ Run this first - it fetches live 2026 data and ingests it. All queries and analy
 
 The fastest way to get started. Just a browser - no Python install required.
 
-1. Go to [colab.research.google.com](https://colab.research.google.com)
-2. Click **File → Upload notebook** and upload `world_cup_predictor.ipynb`
-3. Fill in your credentials in the Section 1 cell (see below)
-4. Click **Runtime → Run all** to run every cell top to bottom
+1. Download the notebook
+2. Go to [colab.research.google.com](https://colab.research.google.com)
+3. Click **File → Upload notebook** and upload `world_cup_predictor.ipynb`
+4. Fill in your credentials in the Section 1 cell (see below)
+5. Click **Runtime → Run all** to run every cell top to bottom
 
 That's it. Colab handles all the dependencies automatically when the first cell runs `pip install`.
 
@@ -116,7 +117,7 @@ ELASTIC_API_KEY  = "your-elastic-api-key"
 
 ### Part 2 - Agent Builder
 
-Everything for Part 2 lives in **`agent_builder_guide.md`**. It gives you two paths to the same result:
+Everything for Part 2 lives in [agent_builder_guide.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/agent_builder_guide.md). It gives you two paths to the same result:
 
 - **Fast path - Dev Tools Console:** the guide's *Quick Setup* section has the five API commands (four tools + one agent) ready to paste into Kibana's **Dev Tools Console** (hamburger menu → Management → Dev Tools). Paste each block, press play, and you're done - no Kibana endpoint to find, no auth headers, Dev Tools uses your current session.
 - **Manual walkthrough:** the rest of the guide builds the same tools and agent field-by-field through the Agent Builder UI, if you want to understand each piece or tweak it.
