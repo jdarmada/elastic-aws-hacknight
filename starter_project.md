@@ -126,6 +126,7 @@ Either way, once the three tools and the agent exist, open **Kibana → Agents**
 #### Navigate to Agent Builder
 
 In your Elastic Serverless project, look for **Agents** in the main navigation. 
+
 ---
 
 #### The Three Tools

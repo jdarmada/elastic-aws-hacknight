@@ -121,4 +121,4 @@ for hit in resp['hits']['hits']:
     print(hit['_source'])
 ```
 
-That's it - you now have a `wc2026_players` index you can search, aggregate, or build an agent on top of. From here, add an explicit mapping for the fields you care about, wire up autocomplete, or generate embeddings for the **Similar Player Finder** idea above.
+That's it - you now have a `wc2026_players` index you can search, aggregate, or layer AI on top of. From here, add an explicit mapping for the fields you care about, wire up autocomplete, or add semantic search, embeddings, and an LLM chatbot with the [EIS guide](eis_guide.md) - everything the **Similar Player Finder**, **Soccer RAG Chatbot**, and **AI Match Summary Generator** ideas above need.

@@ -16,9 +16,9 @@ You'll build three custom ES|QL tools and wire them into a custom agent with a f
 
 ## Navigate to Agent Builder
 
+In your Elastic Serverless project, open **Kibana** and look for **Agents** in the main navigation.
 
-Look for **Agents** in the main navigation.
-
+> **Don't see it?** Agent Builder is on by default on Serverless. If it's missing, search for **Agent Builder** in Kibana's global search bar (or check **Management → Advanced Settings**) to enable it.
 
 ---
 
