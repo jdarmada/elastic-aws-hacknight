@@ -18,7 +18,7 @@ Projects will be evaluated on the following:
 At the end, you'll have the chance to present what you built, no matter how complete your project is. Don't be shy! It's in the spirit of the event to show off your ideas even if it's not done. 
 
 Some presentation guidelines:
-- **3 mins max**
+- **2 mins max**
 - Quickly mention what the project does, but more importantly, show the Elasticsearch portion from the queries you used, the custom tools and agents you built within Agent Builder.
 
 ## Prizes
