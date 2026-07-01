@@ -4,7 +4,6 @@ Predict 2026 World Cup matches using live data from the tournament happening rig
 
 > *"Predict the upcoming Brazil vs Scotland match"*
 > *"Compare France and Argentina based on their 2026 results so far"*
-> *"Who are the top scorers in the tournament?"*
 > *"When does England play next and what's their form?"*
 
 The agent pulls live stats from Elasticsearch, reasons over them, and gives you a structured prediction with scoreline, key factors, and confidence level. The project has two parts that build on each other:
@@ -119,24 +118,23 @@ ELASTIC_API_KEY  = "your-elastic-api-key"
 
 Everything for Part 2 lives in [agent_builder_guide.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/agent_builder_guide.md). It gives you two paths to the same result:
 
-- **Fast path - Dev Tools Console:** the guide's *Quick Setup* section has the five API commands (four tools + one agent) ready to paste into Kibana's **Dev Tools Console** (hamburger menu → Management → Dev Tools). Paste each block, press play, and you're done - no Kibana endpoint to find, no auth headers, Dev Tools uses your current session.
+- **Fast path - Dev Tools Console:** the guide's *Quick Setup* section has the four API commands (three tools + one agent) ready to paste into Kibana's **Dev Tools Console** (hamburger menu → Management → Dev Tools). Paste each block, press play, and you're done - no Kibana endpoint to find, no auth headers, Dev Tools uses your current session.
 - **Manual walkthrough:** the rest of the guide builds the same tools and agent field-by-field through the Agent Builder UI, if you want to understand each piece or tweak it.
 
-Either way, once the four tools and the agent exist, open **Kibana → Agents** and the **World Cup 2026 Predictor** is ready to chat.
+Either way, once the three tools and the agent exist, open **Kibana → Agents** and the **World Cup 2026 Predictor** is ready to chat.
 
 #### Navigate to Agent Builder
 
 In your Elastic Serverless project, look for **Agents** in the main navigation. 
 ---
 
-#### The Four Tools
+#### The Three Tools
 
 | Tool ID | What it does |
 |---|---|
 | `get_team_form` | Full match-by-match results for a team in 2026 - scores, opponents, stage, outcome |
 | `get_team_stats_2026` | Aggregated stats: wins, draws, losses, goals scored/conceded |
 | `get_upcoming_fixtures` | Scheduled matches not yet played - lets the agent find real upcoming matchups |
-| `get_top_scorers` | Tournament goal scorers ranked by total goals |
 
 See `agent_builder_guide.md` for the exact ES|QL query and parameter config for each tool.
 
@@ -148,7 +146,7 @@ See `agent_builder_guide.md` for the exact ES|QL query and parameter config for 
 |---|---|
 | **Agent ID** | `wc2026_predictor` |
 | **Display name** | World Cup 2026 Predictor |
-| **Tools** | All four above |
+| **Tools** | All three above |
 
 **Custom instructions summary:** The agent is instructed to always check upcoming fixtures first to confirm a match is actually scheduled, then pull team stats and form, then produce a structured prediction with scoreline, key factors, and confidence level. Full instructions in `agent_builder_guide.md`.
 
@@ -163,9 +161,6 @@ When do France and Argentina play and what's their form so far?
 ```
 ```
 Compare Brazil and Morocco based on their 2026 results
-```
-```
-Who are the top scorers in the tournament?
 ```
 ```
 Predict the Germany vs Ecuador match

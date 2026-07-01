@@ -2,7 +2,7 @@
 
 After running the notebook to ingest live 2026 match data, this guide walks you through building a conversational AI agent on top of it in **Elastic Agent Builder** - no extra code required.
 
-You'll build four custom ES|QL tools and wire them into a custom agent with a football analyst persona. The agent will use real 2026 results to compare teams and predict upcoming matchups.
+You'll build three custom ES|QL tools and wire them into a custom agent with a football analyst persona. The agent will use real 2026 results to compare teams and predict upcoming matchups.
 
 ---
 
@@ -28,9 +28,9 @@ If you just want everything created in one go, paste the API commands below into
 
 Open the **hamburger menu (top left) → Management → Dev Tools**, paste each block, and press the **play button**. Dev Tools uses your current Kibana session, so there's no endpoint to find and no auth headers to set.
 
-Run them in order: the four tools first, then the agent. Once all five have run, open **Kibana → Agents** and the **World Cup 2026 Predictor** is ready to chat.
+Run them in order: the three tools first, then the agent. Once all four have run, open **Kibana → Agents** and the **World Cup 2026 Predictor** is ready to chat.
 
-> Prefer to understand each tool field-by-field, or tweak things in the UI? Skip this section and follow the manual **Step 1 - Step 6** walkthrough below instead. The two paths produce the same result.
+> Prefer to understand each tool field-by-field, or tweak things in the UI? Skip this section and follow the manual **Step 1 - Step 5** walkthrough below instead. The two paths produce the same result.
 
 ### Tool 1: `get_team_form`
 
@@ -92,21 +92,6 @@ POST kbn://api/agent_builder/tools
 }
 ```
 
-### Tool 4: `get_top_scorers`
-
-```
-POST kbn://api/agent_builder/tools
-{
-  "id": "get_top_scorers",
-  "type": "esql",
-  "description": "Returns the top goal scorers in the 2026 World Cup ranked by number of goals. Use this when the user asks who has scored the most goals, who the standout players are, or when evaluating attacking threat. Own goals are excluded.",
-  "configuration": {
-    "query": "FROM wc2026_matches | WHERE status == \"played\" | MV_EXPAND goals | EVAL scorer = goals.scorer, goal_team = goals.team, goal_type = goals.type | WHERE goal_type != \"own_goal\" | STATS goal_count = COUNT(*) BY scorer, goal_team | SORT goal_count DESC | LIMIT 15",
-    "params": {}
-  }
-}
-```
-
 ### Agent: `wc2026_predictor`
 
 ```
@@ -119,14 +104,13 @@ POST kbn://api/agent_builder/agents
   "avatar_color": "#16C47F",
   "avatar_symbol": "⚽",
   "configuration": {
-    "instructions": "You are a football analyst specialising in the 2026 FIFA World Cup, currently underway in the USA, Mexico, and Canada.\n\nYou have access to live tournament data: completed results, upcoming fixtures, team form, and goal scorers.\n\nWhen a user asks you to predict a match:\n1. Call get_upcoming_fixtures for each team to confirm they are actually scheduled to play\n2. Call get_team_stats_2026 for both teams to get their tournament numbers\n3. Call get_team_form for both teams to see their actual match-by-match results\n4. Produce a prediction structured as:\n   - Current form summary for each team (results so far, goals scored/conceded)\n   - Statistical edge: which team has the data advantage and why\n   - Key factors: 2-3 things that will decide this match\n   - Predicted scoreline and winner\n   - Confidence level: Low / Medium / High with one sentence of reasoning\n\nWhen asked about top scorers or attacking threat, use get_top_scorers.\n\nAlways ground your predictions in the 2026 data - this is a live tournament, not historical analysis.\n\nKeep your tone punchy and engaging. \n\nOnly answer questions about the 2026 World Cup. Politely decline anything off-topic.",
+    "instructions": "You are a football analyst specialising in the 2026 FIFA World Cup, currently underway in the USA, Mexico, and Canada.\n\nYou have access to live tournament data: completed results, upcoming fixtures, and team form.\n\nWhen a user asks you to predict a match:\n1. Call get_upcoming_fixtures for each team to confirm they are actually scheduled to play\n2. Call get_team_stats_2026 for both teams to get their tournament numbers\n3. Call get_team_form for both teams to see their actual match-by-match results\n4. Produce a prediction structured as:\n   - Current form summary for each team (results so far, goals scored/conceded)\n   - Statistical edge: which team has the data advantage and why\n   - Key factors: 2-3 things that will decide this match\n   - Predicted scoreline and winner\n   - Confidence level: Low / Medium / High with one sentence of reasoning\n\nAlways ground your predictions in the 2026 data - this is a live tournament, not historical analysis.\n\nKeep your tone punchy and engaging. \n\nOnly answer questions about the 2026 World Cup. Politely decline anything off-topic.",
     "tools": [
       {
         "tool_ids": [
           "get_team_form",
           "get_team_stats_2026",
-          "get_upcoming_fixtures",
-          "get_top_scorers"
+          "get_upcoming_fixtures"
         ]
       }
     ]
@@ -138,7 +122,7 @@ POST kbn://api/agent_builder/agents
 
 ## Manual Walkthrough (UI, step by step)
 
-The remaining steps build the exact same four tools and agent through the Agent Builder UI - useful if you want to understand each field or tweak things. If you already ran the Dev Tools commands above, you can skip straight to **Step 6 - Chat With Your Agent**.
+The remaining steps build the exact same three tools and agent through the Agent Builder UI - useful if you want to understand each field or tweak things. If you already ran the Dev Tools commands above, you can skip straight to **Step 5 - Chat With Your Agent**.
 
 ---
 
@@ -253,36 +237,7 @@ Save the tool.
 
 ---
 
-## Step 4 - Create Tool: `get_top_scorers`
-
-Aggregates goals across the nested `goals` field to surface tournament top scorers.
-
-| Field | Value |
-|---|---|
-| **Tool ID** | `get_top_scorers` |
-| **Type** | ES\|QL |
-| **Description** | Returns the top goal scorers in the 2026 World Cup, ranked by number of goals. Use this when the user asks who has scored the most goals, who the standout players are, or when evaluating attacking threat. Optionally filter by team. |
-
-**Query:**
-
-```esql
-FROM wc2026_matches
-| WHERE status == "played"
-| MV_EXPAND goals
-| EVAL scorer = goals.scorer, goal_team = goals.team, goal_type = goals.type
-| WHERE goal_type != "own_goal"
-| STATS goal_count = COUNT(*) BY scorer, goal_team
-| SORT goal_count DESC
-| LIMIT 15
-```
-
-> **Note:** This query uses `MV_EXPAND` on the nested goals field - it works because Agent Builder's ES|QL engine flattens nested objects at query time. If you get an error, check that your Elastic version supports `MV_EXPAND` on nested fields, or simplify to count total goals per match instead.
-
-Save the tool.
-
----
-
-## Step 5 - Create the Custom Agent
+## Step 4 - Create the Custom Agent
 
 Go to **Manage components → Agents → New agent**.
 
@@ -300,7 +255,7 @@ Go to **Manage components → Agents → New agent**.
 ```
 You are a football analyst specialising in the 2026 FIFA World Cup, currently underway in the USA, Mexico, and Canada.
 
-You have access to live tournament data: completed results, upcoming fixtures, team form, and goal scorers.
+You have access to live tournament data: completed results, upcoming fixtures, and team form.
 
 When a user asks you to predict a match:
 1. Call get_upcoming_fixtures for each team to confirm they are actually scheduled to play
@@ -313,8 +268,6 @@ When a user asks you to predict a match:
    - Predicted scoreline and winner
    - Confidence level: Low / Medium / High with one sentence of reasoning
 
-When asked about top scorers or attacking threat, use get_top_scorers.
-
 Always ground your predictions in the 2026 data - this is a live tournament, not historical analysis.
 
 Keep your tone punchy and engaging. You are talking to developers at a hackathon, not writing a press release.
@@ -324,11 +277,10 @@ Only answer questions about the 2026 World Cup. Politely decline anything off-to
 
 ### Tools tab
 
-Assign all four tools:
+Assign all three tools:
 - `get_team_form`
 - `get_team_stats_2026`
 - `get_upcoming_fixtures`
-- `get_top_scorers`
 
 > **Tip:** Leave built-in Elastic tools unassigned to keep the agent focused.
 
@@ -338,7 +290,7 @@ Click **Save and chat**.
 
 ---
 
-## Step 6 - Chat With Your Agent
+## Step 5 - Chat With Your Agent
 
 Try these prompts - they're all grounded in live 2026 data:
 
@@ -347,9 +299,6 @@ When do France and Argentina play and what's their form so far?
 ```
 ```
 Compare Brazil and Morocco based on their 2026 tournament results
-```
-```
-Who are the top scorers in the tournament so far?
 ```
 ```
 Predict the Germany vs Ecuador match
