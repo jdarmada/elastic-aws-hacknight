@@ -11,7 +11,7 @@ Projects will be evaluated on the following:
 | Criteria | Description |
 |----------|-------------|
 | **Use of Elasticsearch** | Demonstrates meaningful use of Elasticsearch features such as search, aggregations, vector search, and Agent Builder. |
-| **Use of AWS Bedrock** | Use of a managed LLM through AWS Bedrock. If you're using the built-in chat within Agent Builder, it already uses Bedrock. |
+| **Use of AWS Bedrock** | Use of a managed LLM through AWS Bedrock. The easiest path is the **Elastic Inference Service (EIS)** - its LLM and embedding models are hosted on Bedrock with zero setup, so the built-in Agent Builder chat already counts. See the [EIS guide](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/eis_guide.md). |
 | **Creativity** | Presents a unique idea, novel user experience, or interesting technical implementation. |
 | **Usefulness** | Solves a real problem or provides valuable insights from the data. |
 
@@ -34,6 +34,8 @@ You have the choice on where to start:
 2. A completely new project that uses Elasticsearch and soccer data in some capacity. Head over to [open_challenge.md](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/open_challenge.md) for examples of what you can build and an example of how to ingest data.
 
 Either direction you follow you must use a serverless Elastic deployment: [Elastic Cloud Serverless free-trial](https://www.elastic.co/cloud/cloud-trial-overview)
+
+**Need an LLM or embeddings?** Use the **Elastic Inference Service (EIS)** - Bedrock-hosted models with no API keys and no setup. See the [EIS guide](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/eis_guide.md) for using it as your agent's LLM, for semantic search, and for embeddings.
 
 
 ## Public Soccer Datasets
@@ -77,8 +79,11 @@ Handy documentation and references for building tonight.
 - [Bulk API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk) - efficient batch indexing
 - [Upload a file in Kibana](https://www.elastic.co/docs/manage-data/ingest/upload-data-files) - no-code CSV/JSON ingest
 
-### AWS Bedrock
-- [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/)
+### AI models - Elastic Inference Service (EIS, recommended) & AWS Bedrock
+- **[EIS guide (this repo)](https://github.com/jdarmada/elastic-aws-hacknight/blob/main/eis_guide.md)** - use Bedrock-hosted LLMs and embeddings with zero setup, no keys
+- [Elastic Inference Service docs](https://www.elastic.co/docs/explore-analyze/elastic-inference/eis)
+- [Model configuration in Agent Builder](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/models)
+
 
 
 

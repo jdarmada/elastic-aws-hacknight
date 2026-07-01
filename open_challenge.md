@@ -11,6 +11,8 @@
 | **Team Performance Explorer** | Compare national teams across tournaments using advanced statistics and historical trends. | Aggregations |
 | **AI Match Summary Generator** | Generate natural-language summaries of matches from event data using an LLM with Elasticsearch as the retrieval layer. | Semantic search, vector search, RAG |
 
+> **Need an LLM, semantic search, or embeddings?** Don't wire up your own API keys - use the **Elastic Inference Service (EIS)**. Its LLM and embedding models are hosted on AWS Bedrock and ready with zero setup. The [EIS guide](eis_guide.md) shows how to use it for chat, semantic search, and dense-vector embeddings - everything the RAG, similarity, and summary ideas above need.
+
 ## Stretch Ideas
 
 - Build a **player similarity search** using vector embeddings.
@@ -25,7 +27,7 @@
 
 Here's a complete, runnable example that pulls the [FIFA World Cup 2026 Player Performance Dataset](https://www.kaggle.com/datasets/rauffauzanrambe/fifa-world-cup-2026-player-performance-dataset) from Kaggle and indexes it into Elasticsearch. This is just one dataset - the same pattern works for any CSV-based source.
 
-Run it in a Jupyter/Colab notebook or as a plain Python script. If you don't want to ingest CSVs programmatically, you can also of use the `upload file` option within the Elasticsearch UI.
+Run it in a Jupyter/Colab notebook or as a plain Python script. If you don't want to ingest CSVs programmatically, you can also use the `upload file` option within the Elasticsearch UI.
 
 ### 1. Install dependencies
 
